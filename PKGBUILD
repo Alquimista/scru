@@ -1,6 +1,6 @@
 # Contributor: Roberto Gea (Alquimista) <alquimistaotaku@gmail.com>
 
-pkgname=scru
+pkgname=scru-hg
 pkgver=1.0.0
 pkgrel=1
 pkgdesc="Screenshot Uploader"
@@ -14,10 +14,9 @@ provides=()
 conflicts=()
 replaces=()
 backup=()
-source=(http://example.com/$pkgname-$pkgver.tar.gz)).
+source=(https://bitbucket.org/alquimista/scru/get/tip.tar.gz)
 options=(!emptydirs)
 install=
-
 package() {
   cd $srcdir/$pkgname-$pkgver
   python setup.py install --root=$pkgdir/ --optimize=1
