@@ -1,0 +1,50 @@
+#!/usr/bin/env python2
+# -*- coding: utf-8 -*-
+import plac
+import scru
+
+"""
+Scru
+=====
+    Screenshot Uploader
+
+python 2.7 +
+OS: linux
+"""
+#TODO: GUI version (PyQt)
+
+__autor__ = 'Roberto Gea (Alquimista)'
+
+# version number: {major}.{minor}.{maintenance}
+# major: big changes (new stuff, or a lot of small changes)
+# minor: small changes (small changes)
+# maintenance: bugfix or refactoring
+__version__ = '1.0.0'
+
+LINKS = ['small_square', 'large_thumbnail',
+         'imgur_page', 'original', 'delete_page']
+
+
+@plac.annotations(
+    version=('output version information and exit', 'flag', 'v', True),
+    sound=('tnotification screenshot sound', 'flag', 's', True),
+    notify=('tnotify of the uploaded screenshot', 'flag', 'n', True),
+    window=('interactively select a window or rectangle with the mouse.',
+            'flag', 'w', True),
+    link=('link to get from the image uploaded to imgur.'
+          '\nLinks: ' + str(LINKS), 'option', 'l', str, LINKS, 'URL'),
+    quality=('image quality (1-100) high value means  high  size,'
+             'low  compression.\nDefault: 75. (Effect differs depending on '
+             'file format chosen).', 'option', 'q', int, None, 'NUM'),
+    delay=('wait NUM seconds before taking a shot, and display a countdown',
+           'option', 'd', int, None, 'NUM'))
+def main(version, sound, notify, window, link, quality, delay):
+    if version:
+        print 'scru version ' + __version__
+    else:
+        scru.screen_to_imgur(link, window, sound, notify, quality, delay)
+
+
+if __name__ == '__main__':
+    plac.call(main)
+
