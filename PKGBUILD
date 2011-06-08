@@ -18,6 +18,6 @@ md5sums=()  #generate with 'makepkg -g'
 
 build() {
 	cd $srcdir/$pkgname
-	python setup.py install --root=$pkgdir/ || return 1
+	python2 setup.py install --root=$pkgdir/ || return 1
 }
 

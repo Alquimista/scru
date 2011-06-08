@@ -10,7 +10,7 @@ def show_notification(title, message, image=None):
     pynotify.init('Scru')
     n = pynotify.Notification(title, message, image)
     n.set_hint_string('append', '')
-    n.set_hint_int('transient', 1)
+    n.set_hint('transient', True)
     n.set_urgency(pynotify.URGENCY_NORMAL)
     n.set_timeout(5000)
     try:
