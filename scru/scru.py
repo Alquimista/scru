@@ -23,7 +23,7 @@ def complete(url, notify):
     image_uri = 'file://' + image
     if notify:
         # Get the thumb image of the current uploaded image
-        utils.show_notification('Scru:',
+        utils.show_notification('Scru',
             'The screenshot was uploaded to imgur', image_uri)
     print 'The screenshot was uploaded to imgur'
     print 'Link was copied to the clipboard'
@@ -38,9 +38,9 @@ def screen_to_imgur(link, select, sound,
     # Take the screenshot
     screen = screenshot.grab(select, sound, quality, delay)
     # Upload the screenshot
-    if notify:
-        utils.show_notification('Scru:',
-            'Uploading image to imgur...', 'file://' + APP_ICON)
+#    if notify:
+#        utils.show_notification('Scru',
+#            'Uploading image to imgur...', 'file://' + APP_ICON)
     print 'Uploading image to imgur...'
     data = imgur.upload(screen)
     screen.close()

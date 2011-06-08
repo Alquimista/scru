@@ -13,7 +13,7 @@ setup(
     install_requires=['python-notify', 'plac'],
     data_files=[
         ('/usr/bin', ['bin/scru']),
-        ('/usr/bin', ['scru-openbox-pipemenu']),
+        ('/usr/bin', ['bin/scru-openbox-pipemenu']),
         ('/usr/share/sounds', ['sounds/scru_shot.wav']),
         ('/usr/share/icons/hicolor/scalable/apps', ['icons/scru.svg']),
         ('/usr/share/licenses/scru', ['LICENSE'])],
