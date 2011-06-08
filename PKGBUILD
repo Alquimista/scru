@@ -13,7 +13,7 @@ makedepends=("python2-distribute" "mercurial")
 optdepnds=("python2-notify: soporte para notificaciones")
 source=(http://bitbucket.org/itkach/${pkgname}/get/${pkgver}.tar.bz2)
 options=(!emptydirs)
-md5sums=() #generate with 'makepkg -g'
+md5sums=()  #generate with 'makepkg -g'
 
 
 build() {
