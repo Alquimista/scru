@@ -21,6 +21,7 @@ __autor__ = 'Roberto Gea (Alquimista)'
 # maintenance: bugfix or refactoring
 __version__ = '1.0.0'
 
+#TODO: embed codes
 LINKS = ['small_square', 'large_thumbnail',
          'imgur_page', 'original', 'delete_page']
 
