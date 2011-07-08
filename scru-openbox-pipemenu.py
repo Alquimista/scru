@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 
 menu_cmd = (
-    ('Capture Entire Screen', 'scrot'),
-    ('Capture Area', 'scrot -s'),
-    ('Capture Entire Screen &amp; Upload', 'scru -sn -q80'),
-    ('Capture window or Area &amp; Upload', 'scru -snw -q80'))
+    ('Capture Entire Screen', 'scru -s -d2 -noup'),
+    ('Capture window or Area', 'scru -sw -d2 -noup'),
+    ('Capture Entire Screen &amp; Upload', 'scru -sn -d2 -q0'),
+    ('Capture window or Area &amp; Upload', 'scru -snw -d2 -q0'))
 
 print('<openbox_pipe_menu>')
 for label, command in menu_cmd:

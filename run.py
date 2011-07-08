@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import plac
 import scru
+import time
 
 """
 Scru
@@ -19,17 +20,20 @@ __autor__ = 'Roberto Gea (Alquimista)'
 # major: big changes (new stuff, or a lot of small changes)
 # minor: small changes (small changes)
 # maintenance: bugfix or refactoring
-__version__ = '1.0.0'
+__version__ = '1.1.1'
 
 #TODO: embed codes
 LINKS = ['small_square', 'large_thumbnail',
-         'imgur_page', 'original', 'delete_page']
+         'imgur_page', 'original', 'delete_page',
+         'html_clikeable_thumbail']
 
 
 @plac.annotations(
-    version=('output version information and exit', 'flag', 'v', True),
-    sound=('tnotification screenshot sound', 'flag', 's', True),
-    notify=('tnotify of the uploaded screenshot', 'flag', 'n', True),
+    version=('output version information and exit', 'flag', 'v'),
+    sound=('notification screenshot sound', 'flag', 's'),
+    notify=('notify of the uploaded screenshot', 'flag', 'n'),
+    noupload=("only screenshot", 'flag', 'noup', None, None, True),
+    output=("screenshot filename", 'option', 'o', str, None, 'FILENAME'),
     window=('interactively select a window or rectangle with the mouse.',
             'flag', 'w', True),
     link=('link to get from the image uploaded to imgur.'
@@ -39,11 +43,23 @@ LINKS = ['small_square', 'large_thumbnail',
              'file format chosen).', 'option', 'q', int, None, 'NUM'),
     delay=('wait NUM seconds before taking a shot, and display a countdown',
            'option', 'd', int, None, 'NUM'))
-def main(version, sound, notify, window, link, quality, delay):
+def main(version, sound, notify, noupload, output,
+         window, link, quality, delay):
     if version:
         print 'scru version ' + __version__
     else:
-        scru.screen_to_imgur(link, window, sound, notify, quality, delay)
+        if noupload:
+            if not output:
+                # ignore notify and link arguments ()
+                # (nothing to notify, no link to show)
+                name = 'SCREENSHOT_%G%S'
+                output = time.strftime(name, time.localtime()) + '.png'
+                screenshot = scru.screenshot.grab(output, window, sound,
+                                                  quality, delay)
+                screenshot.close()
+        else:
+            scru.screen_to_imgur(
+                output, link, window, sound, notify, quality, delay)
 
 
 if __name__ == '__main__':

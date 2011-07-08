@@ -13,11 +13,13 @@ class ScrotNotFound(Exception):
     """scrot must be installed"""
 
 
-def grab(select, sound, quality, delay):
+def grab(filename, select, sound, quality, delay):
     """Grab the screen as binary file"""
-    # Temporary file
-    f = tempfile.NamedTemporaryFile(suffix='.png', prefix='screenshot_scrot_')
-    filename = f.name
+    if not filename:
+        # Temporary file
+        f = tempfile.NamedTemporaryFile(suffix='.png',
+            prefix='screenshot_scrot_')
+        filename = f.name
     grab_filename(filename, select, sound, quality, delay)
     # Open the temp screenshot
     return open(filename, 'rb')
@@ -30,11 +32,11 @@ def grab_filename(filename, select, sound, quality, delay):
         cmd = ['scrot', filename]
         if select:
             cmd.append('-s')
-            cmd.append('-b')
+            cmd.append('-b')    #show window decoration (border)
         if quality:
             cmd.append('-q%d' % quality)
-
         if delay:
+            # delay and show regresive count
             cmd.append('-d%d' % delay)
             cmd.append('-c')
         subprocess.call(cmd)

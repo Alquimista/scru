@@ -29,24 +29,24 @@ def complete(url, notify):
     print 'Link was copied to the clipboard'
 
 
-def screen_to_imgur(link, select, sound,
+def screen_to_imgur(filename, link, select, sound,
                     notify, quality, delay):
     """Take a screenshot and upload to imgur"""
     # Default link argument
     if not link:
         link = 'original'
     # Take the screenshot
-    screen = screenshot.grab(select, sound, quality, delay)
-    # Upload the screenshot
-#    if notify:
-#        utils.show_notification('Scru',
-#            'Uploading image to imgur...', 'file://' + APP_ICON)
+    screen = screenshot.grab(filename, select, sound, quality, delay)
     print 'Uploading image to imgur...'
     data = imgur.upload(screen)
     screen.close()
     # Get the links of the uploaded screenshot
-    url = data['upload']['links'][link]
-#    print data['upload']['links']
+    if link == 'html_clikeable_thumbail':
+        thumb = data['upload']['links']['large_thumbnail']
+        original = data['upload']['links']['original']
+        url = '<a href="%s"><img src=%s/></a>' % (original, thumb)
+    else:
+        url = data['upload']['links'][link]
     notify_im = data['upload']['links']['small_square']    #thumb image
     # Copy to the clipboard the url of the uploaded screenshot
     clipboard.copy(url)
