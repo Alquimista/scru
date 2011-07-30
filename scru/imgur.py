@@ -13,8 +13,8 @@ IMGUR_UPLOAD_URL = 'http://api.imgur.com/2/upload.json'
 API_KEY = '60bbfaa8c24ff3428c4591ed252523ff'
 
 
-class ApiKeyNotSpecified(Exception):
-    """'No API key is specified"""
+class ApiKeyNotFound(Exception):
+    """'No API key is empty"""
 
 
 def upload(image, api_key=API_KEY):
@@ -29,7 +29,7 @@ def upload(image, api_key=API_KEY):
             im = f.read()
     # Error when no AI key is specified
     if not api_key:
-        raise ApiKeyNotSpecified
+        raise ApiKeyNotFound
     else:
         # The image need to be encoded to base64
         data = {

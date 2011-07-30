@@ -13,6 +13,7 @@ python 2.7 +
 OS: linux
 """
 #TODO: GUI version (PyQt)
+#TODO?: omploader, imageshack
 
 __autor__ = 'Roberto Gea (Alquimista)'
 
@@ -25,7 +26,7 @@ __version__ = '1.1.1'
 #TODO: embed codes
 LINKS = ['small_square', 'large_thumbnail',
          'imgur_page', 'original', 'delete_page',
-         'html_clikeable_thumbail']
+         'html_clikeable_thumbail', 'IM']
 
 # command flags
 @plac.annotations(

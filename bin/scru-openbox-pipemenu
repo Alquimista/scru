@@ -3,9 +3,9 @@
 
 menu_cmd = (
     ('Capture Entire Screen', 'scru -s -d2 -noup'),
-    ('Capture window or Area', 'scru -sw -d2 -noup'),
+    ('Capture Window or Area', 'scru -sw -d2 -noup'),
     ('Capture Entire Screen &amp; Upload', 'scru -sn -d2 -q0'),
-    ('Capture window or Area &amp; Upload', 'scru -snw -d2 -q0'))
+    ('Capture Window or Area &amp; Upload', 'scru -snw -d2 -q0'))
 
 print('<openbox_pipe_menu>')
 for label, command in menu_cmd:

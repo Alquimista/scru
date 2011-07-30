@@ -45,6 +45,9 @@ def screen_to_imgur(filename, link, select, sound,
         thumb = data['upload']['links']['large_thumbnail']
         original = data['upload']['links']['original']
         url = '<a href="%s"><img src=%s/></a>' % (original, thumb)
+    elif link == 'IM':
+        original = data['upload']['links']['original']
+        url = '[IMG]%s[/IMG]' % (original, thumb)
     else:
         url = data['upload']['links'][link]
     notify_im = data['upload']['links']['small_square']    #thumb image
