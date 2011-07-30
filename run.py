@@ -27,7 +27,7 @@ LINKS = ['small_square', 'large_thumbnail',
          'imgur_page', 'original', 'delete_page',
          'html_clikeable_thumbail']
 
-
+# command flags
 @plac.annotations(
     version=('output version information and exit', 'flag', 'v'),
     sound=('notification screenshot sound', 'flag', 's'),
@@ -50,13 +50,12 @@ def main(version, sound, notify, noupload, output,
     else:
         if noupload:
             if not output:
-                # ignore notify and link arguments ()
+                # ignore notify and link arguments
                 # (nothing to notify, no link to show)
                 name = 'SCREENSHOT_%G%S'
                 output = time.strftime(name, time.localtime()) + '.png'
-                screenshot = scru.screenshot.grab(output, window, sound,
-                                                  quality, delay)
-                screenshot.close()
+            scru.screenshot.grab_filename(
+                output, window, sound, quality, delay)
         else:
             scru.screen_to_imgur(
                 output, link, window, sound, notify, quality, delay)

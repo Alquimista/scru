@@ -7,10 +7,12 @@ from gi.repository import Notify, GLib
 Notify.init("Scru notify")
 #TODO: notify-send --hint=int:transient:1 -t 3000 -u normal
 
+
 def show_notification(title, message, image=None):
     """Show a notification message"""
     n = Notify.Notification.new(title, message, image)
-    n.set_hint("transient", GLib.Variant.new_boolean(True))   #Gnome3 transient
+    # Gnome3 transient
+    n.set_hint("transient", GLib.Variant.new_boolean(True))
     n.set_urgency(Notify.Urgency.NORMAL)
     n.set_timeout(5000)
     try:

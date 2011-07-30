@@ -28,22 +28,23 @@ def grab(filename, select, sound, quality, delay):
 def grab_filename(filename, select, sound, quality, delay):
     """Grab the screen as image file"""
     # Wrap of scrot command
+    cmd = ['scrot', filename]
+    if select:
+        cmd.append('-s')
+        cmd.append('-b')    #show window decoration (border)
+    if quality:
+        cmd.append('-q%d' % quality)
+    if delay:
+        # delay and show regresive count
+        cmd.append('-d%d' % delay)
+        cmd.append('-c')
+    if sound:
+        play_screenshot_sound()
     try:
-        cmd = ['scrot', filename]
-        if select:
-            cmd.append('-s')
-            cmd.append('-b')    #show window decoration (border)
-        if quality:
-            cmd.append('-q%d' % quality)
-        if delay:
-            # delay and show regresive count
-            cmd.append('-d%d' % delay)
-            cmd.append('-c')
         subprocess.call(cmd)
-        if sound:
-            play_screenshot_sound()
     except Exception, e:
         raise ScrotNotFound
+        print e
 
 
 def play_screenshot_sound():
