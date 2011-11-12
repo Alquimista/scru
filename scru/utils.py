@@ -17,7 +17,7 @@ def show_notification(title, message, image=None):
     #n.set_timeout(5000)
     #try:
     #    if not n.show():
-    #        print "Failed to send notification"
+    #       print "Failed to send notification"
     # Not notify daemon installed
     # NOtify OSD, Notification-daemon-xfce, notification-daemon, etc
     #except glib.GError:
@@ -29,10 +29,10 @@ def show_notification(title, message, image=None):
     n.set_hint('transient', True)
     n.set_urgency(pynotify.URGENCY_NORMAL)
     n.set_timeout(5000)
-    try:
-        if not n.show():
-            print "Failed to send notification"
+    #try:
+    #    if not n.show():
+    #        print "Failed to send notification"
     # Not notify daemon installed
     # NOtify OSD, Notification-daemon-xfce, notification-daemon, etc
-    except glib.GError:
-        pass
+    #except glib.GError:
+    #    pass
