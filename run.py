@@ -28,6 +28,7 @@ LINKS = ['small_square', 'large_thumbnail',
          'imgur_page', 'original', 'delete_page',
          'html_clikeable_thumbail', 'IM']
 
+
 # command flags
 @plac.annotations(
     version=('output version information and exit', 'flag', 'v'),
@@ -39,13 +40,14 @@ LINKS = ['small_square', 'large_thumbnail',
             'flag', 'w', True),
     link=('link to get from the image uploaded to imgur.'
           '\nLinks: ' + str(LINKS), 'option', 'l', str, LINKS, 'URL'),
-    quality=('image quality (1-100) high value means  high  size,'
+    quality=('image quality (1-100) high value means  high size,'
              'low  compression.\nDefault: 75. (Effect differs depending on '
              'file format chosen).', 'option', 'q', int, None, 'NUM'),
     delay=('wait NUM seconds before taking a shot, and display a countdown',
-           'option', 'd', int, None, 'NUM'))
+           'option', 'd', int, None, 'NUM'),
+    optipng=('Optimize png with optipng', 'flag', 'c'))
 def main(version, sound, notify, noupload, output,
-         window, link, quality, delay):
+         window, link, quality, delay, optipng):
     if version:
         print 'scru version ' + __version__
     else:
@@ -56,10 +58,10 @@ def main(version, sound, notify, noupload, output,
                 name = 'SCREENSHOT_%G%S'
                 output = time.strftime(name, time.localtime()) + '.png'
             scru.screenshot.grab_filename(
-                output, window, sound, quality, delay)
+                output, window, sound, quality, delay, optipng)
         else:
             scru.screen_to_imgur(
-                output, link, window, sound, notify, quality, delay)
+                output, link, window, sound, notify, quality, delay, optipng)
 
 
 if __name__ == '__main__':

@@ -30,14 +30,14 @@ def complete(url, notify):
 
 
 def screen_to_imgur(filename, link, select, sound,
-                    notify, quality, delay):
+                    notify, quality, delay, optipng):
     """Take a screenshot and upload to imgur"""
     # Default link argument
     if not link:
         link = 'original'
     # Take the screenshot
-    screen = screenshot.grab(filename, select, sound, quality, delay)
-    print 'Uploading image to imgur...'
+    screen = screenshot.grab(filename, select, sound, quality, delay, optipng)
+#    print 'Uploading image to imgur...'
     data = imgur.upload(screen)
     screen.close()
     # Get the links of the uploaded screenshot
@@ -56,7 +56,8 @@ def screen_to_imgur(filename, link, select, sound,
     if notify:
         # Notify when done
         complete(notify_im, notify)
-    print link.upper() + ': ' + url
+#    print link.upper() + ': ' + url
+    print url
     return url
 
 

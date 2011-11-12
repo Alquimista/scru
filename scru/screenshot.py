@@ -13,22 +13,24 @@ class ScrotNotFound(Exception):
     """scrot must be installed"""
 
 
-def grab(filename, select, sound, quality, delay):
+def grab(filename, select, sound, quality, delay, optipng):
     """Grab the screen as binary file"""
     if not filename:
         # Temporary file
         f = tempfile.NamedTemporaryFile(suffix='.png',
             prefix='screenshot_scrot_')
         filename = f.name
-    grab_filename(filename, select, sound, quality, delay)
+    grab_filename(filename, select, sound, quality, delay, optipng)
     # Open the temp screenshot
     return open(filename, 'rb')
 
 
-def grab_filename(filename, select, sound, quality, delay):
+def grab_filename(filename, select, sound, quality, delay, optipng):
     """Grab the screen as image file"""
     # Wrap of scrot command
     cmd = ['scrot', filename]
+    opng = ['optipng', '-preserve', '-quiet', filename]
+    #mogri = ['mogrify' '-depth', '8', filename]
     if select:
         cmd.append('-s')
         cmd.append('-b')    #show window decoration (border)
@@ -38,10 +40,12 @@ def grab_filename(filename, select, sound, quality, delay):
         # delay and show regresive count
         cmd.append('-d%d' % delay)
         cmd.append('-c')
-    if sound:
-        play_screenshot_sound()
     try:
         subprocess.call(cmd)
+        if sound:
+            play_screenshot_sound()
+        if optipng:
+            subprocess.Popen(opng)
     except Exception, e:
         raise ScrotNotFound
         print e
@@ -51,9 +55,9 @@ def play_screenshot_sound():
     """"Play a sound of a camera shot"""
     try:
         # Player for alsa
-        subprocess.Popen(['aplay', '-q', SCREENSHOT_SOUND])
+        subprocess.call(['aplay', '-q', SCREENSHOT_SOUND])
     except OSError:
         # Player for oss
-        subprocess.Popen(['ossplay', '-q', SCREENSHOT_SOUND])
+        subprocess.call(['ossplay', '-q', SCREENSHOT_SOUND])
     else:
         pass
